@@ -45,6 +45,16 @@ void GrabarYLeer() {
 	fclose(archdisco);
 	
 	printf("alumno insertado");
+	cout<<endl;	
+
+	archdisco = fopen("alumnos.dat","at+");
+	
+	while(fread(&alumno,sizeof(alumno),1,archdisco)==1) {
+		printf("MATRICULA =%d ",alumno.matricula); 
+		printf(" NOMBRE =%s ",alumno.nombre); 
+		printf(" MESES =%d ",alumno.edad); 
+		printf("\n"); 
+	};
 }
 /*
 “r” ? Lectura.
