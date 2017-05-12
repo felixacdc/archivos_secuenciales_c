@@ -8,6 +8,7 @@ using namespace std;
 void Crear();
 void GrabarYLeer();
 void Busqueda();
+void Eliminar();
 
 struct {
 	int matricula;
@@ -19,6 +20,7 @@ int main() {
 	Crear();	
 	GrabarYLeer();
 	Busqueda();
+	Eliminar();
 	return 0;
 }
 
@@ -82,6 +84,28 @@ void Busqueda() {
 	};
 	
 	fclose(archdisco);
+}
+
+void Eliminar() {
+	printf("dame matricula eliminar:");
+	int clave; scanf("%d",&clave);getchar();
+	
+	FILE *arch1;
+	FILE *arch2;
+	arch1 = fopen("alumnos.dat","r+");
+	arch2 = fopen("temporal.dat","at+");
+	
+	while(fread(&alumno,sizeof(alumno),1,arch1)==1)
+	{
+		if ( clave != alumno.matricula) 
+			fwrite(&alumno,sizeof(alumno),1,arch2);
+	};
+	
+	fclose(arch1);
+	fclose(arch2);
+	remove("alumnos.dat");
+	rename("temporal.dat","alumnos.dat ");
+	puts("registro eliminado");
 }
 /*
 “r” ? Lectura.
