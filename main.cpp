@@ -7,6 +7,7 @@ using namespace std;
 
 void Crear();
 void GrabarYLeer();
+void Busqueda();
 
 struct {
 	int matricula;
@@ -17,6 +18,7 @@ struct {
 int main() {
 	Crear();	
 	GrabarYLeer();
+	Busqueda();
 	return 0;
 }
 
@@ -55,6 +57,31 @@ void GrabarYLeer() {
 		printf(" MESES =%d ",alumno.edad); 
 		printf("\n"); 
 	};
+	
+	fclose(archdisco);
+}
+
+void Busqueda() {
+	printf("\n");
+	printf("dame matricula buscar:");
+	int clave; 
+	scanf("%d",&clave);
+	getchar();
+	
+	FILE *archdisco;
+	archdisco = fopen("alumnos.dat","at+");
+	while(fread(&alumno,sizeof(alumno),1,archdisco)==1)
+	{
+		if ( clave == alumno.matricula)
+		{ 
+			printf("MATRICULA =%d ",alumno.matricula);
+			printf(" NOMBRE =%s ",alumno.nombre);
+			printf(" MESES =%d ",alumno.edad);
+			printf("\n");
+		};
+	};
+	
+	fclose(archdisco);
 }
 /*
 “r” ? Lectura.
