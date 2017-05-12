@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 using namespace std;
+
+void Crear();
+void GrabarYLeer();
 
 struct {
 	int matricula;
@@ -11,14 +15,37 @@ struct {
 }alumno;
 
 int main() {
-	//creando y cerrando el archivo en disco
+	Crear();	
+	GrabarYLeer();
+	return 0;
+}
+
+void Crear() {
 	FILE *archdisco;
 	archdisco = fopen("alumnos.dat","w");
 	fclose(archdisco);
 	printf("ARCHIVO CREADO");
-	return 0;
+	cout<<endl;
 }
 
+void GrabarYLeer() {
+	printf("dame matricula :");
+	scanf("%d",&alumno.matricula);
+	getchar();
+	
+	printf("dame nombre :");
+	gets(alumno.nombre);
+	
+	printf("dame edad :");
+	scanf("%d",&alumno.edad);
+	
+	FILE *archdisco;
+	archdisco = fopen("alumnos.dat","at+");
+	fwrite(&alumno,sizeof(alumno),1,archdisco);
+	fclose(archdisco);
+	
+	printf("alumno insertado");
+}
 /*
 “r” ? Lectura.
 
